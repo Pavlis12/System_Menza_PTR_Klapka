@@ -1,0 +1,25 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.1.0">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>6ad9c4c4-d378-4eca-9c37-c1d5f34a2c30</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UTB.Minute.AdminClient\UTB.Minute.AdminClient.csproj" />
+    <ProjectReference Include="..\UTB.Minute.ApiService\UTB.Minute.WebApi.csproj" />
+    <ProjectReference Include="..\UTB.Minute.CanteenClient\UTB.Minute.CanteenClient.csproj" />
+    <ProjectReference Include="..\UTB.Minute.Contracts\UTB.Minute.Contracts.csproj" />
+    <ProjectReference Include="..\UTB.Minute.DbManager\UTB.Minute.DbManager.csproj" />
+    <ProjectReference Include="..\UTB.Minute.Db\UTB.Minute.Db.csproj" />
+    <ProjectReference Include="..\UTB.Minute.ServiceDefaults\UTB.Minute.ServiceDefaults.csproj" />
+  </ItemGroup>
+
+</Project>
