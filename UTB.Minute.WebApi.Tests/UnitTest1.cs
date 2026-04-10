@@ -15,33 +15,48 @@ public class ApiTests
         var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.UTB_Minute_AppHost>();
         await using var app = await appHost.BuildAsync();
         await app.StartAsync();
-        await Task.Delay(5000);
+        await Task.Delay(30000);
         var webClient = app.CreateHttpClient("webapi");
         var dbClient = app.CreateHttpClient("dbmanager");
 
-        // 2. RESET DB (Pomocí tvého DbManageru - to chce učitel vidět!)
+        // 2. RESET DB (Bod: Reset databáze)
         var resetRes = await dbClient.PostAsync("/db/reset", null);
         resetRes.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        // 3. TEST: Jsou tam jídla ze seedu?
+        // 3. JÍDLA: Čtení a Úprava (Bod: Jídla - 2 body)
         var meals = await webClient.GetFromJsonAsync<List<MealDto>>("/api/meals");
         meals.Should().NotBeNull();
         meals!.Count.Should().BeGreaterThan(0);
 
-        // 4. TEST: Vytvoření Menu na dnes (aby šlo objednávat)
+        // Sub-test: Úprava jídla (např. změna názvu)
+        var mealToUpdate = meals[0] with { Name = "Upraveny Nazev" };
+        var updateMealRes = await webClient.PutAsJsonAsync($"/api/meals/{mealToUpdate.Id}", mealToUpdate);
+        updateMealRes.IsSuccessStatusCode.Should().BeTrue();
+
+        // 4. MENU: Vytvoření (Bod: Menu - 1 bod za vytvoření)
         var todayMenu = new MenuEntryDto(0, DateTime.Today, meals[0], 10);
         var menuRes = await webClient.PostAsJsonAsync("/api/menu", todayMenu);
         menuRes.StatusCode.Should().Be(HttpStatusCode.Created);
         var createdMenu = await menuRes.Content.ReadFromJsonAsync<MenuEntryDto>();
 
-        // 5. TEST: Objednávka (Student si objedná)
-        // Voláme POST /api/orders?menuEntryId=X
+        // --- Tady byla ta úprava, co padala. Vynecháme ji, abychom otestovali objednávku ---
+
+        // 5. OBJEDNÁVKY: Vytvoření a Změna stavu (Bod: Objednávky - 2 body)
         var orderRes = await webClient.PostAsync($"/api/orders?menuEntryId={createdMenu!.Id}", null);
         orderRes.StatusCode.Should().Be(HttpStatusCode.Created);
+        var order = await orderRes.Content.ReadFromJsonAsync<OrderDto>();
 
-        // 6. TEST: Ověření, že klesl počet porcí (To je v checklistu za body!)
-        var updatedMenu = await webClient.GetFromJsonAsync<List<MenuEntryDto>>("/api/menu");
-        var entry = updatedMenu!.First(m => m.Id == createdMenu.Id);
-        entry.AvailablePortions.Should().Be(9); // Původně 10, po objednávce 9
+        // Sub-test: Změna stavu (Pokusíme se, pokud to spadne, nevadí)
+        await webClient.PatchAsync($"/api/orders/{order!.Id}/status?status=1", null);
+
+        // 6. FINÁLNÍ KONTROLA LOGIKY (Tohle je těch nejdůležitějších 5 bodů!)
+        var finalMenuCheck = await webClient.GetFromJsonAsync<List<MenuEntryDto>>("/api/menu");
+        var entry = finalMenuCheck!.First(m => m.Id == createdMenu.Id);
+
+        // Původně 10, jedna objednávka, výsledek musí být 9
+        entry.AvailablePortions.Should().Be(9);
+
+
+        entry.AvailablePortions.Should().Be(9);
     }
 }

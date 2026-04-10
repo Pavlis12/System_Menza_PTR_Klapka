@@ -2,7 +2,7 @@
 
 public record MealDto(
     int Id,
-    string Description,
+    string Name,
     decimal Price,
     bool IsActive
 );

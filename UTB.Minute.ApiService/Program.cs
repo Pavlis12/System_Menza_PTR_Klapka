@@ -43,7 +43,7 @@ app.MapPost("/api/meals", async (MealDto mealDto, MinuteDbContext db) =>
 {
     var meal = new Meal
     {
-        Description = mealDto.Description,
+        Description = mealDto.Name,
         Price = mealDto.Price,
         IsActive = mealDto.IsActive
     };
@@ -61,7 +61,7 @@ app.MapPut("/api/meals/{id}", async (int id, MealDto mealDto, MinuteDbContext db
     var meal = await db.Meals.FindAsync(id);
     if (meal == null) return Results.NotFound();
 
-    meal.Description = mealDto.Description;
+    meal.Description = mealDto.Name;
     meal.Price = mealDto.Price;
     meal.IsActive = mealDto.IsActive; // Zde se řeší i deaktivace
 
