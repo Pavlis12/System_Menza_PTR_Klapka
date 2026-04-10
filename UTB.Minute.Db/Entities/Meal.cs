@@ -2,7 +2,7 @@
 
 namespace UTB.Minute.Db.Entities;
 
-public class Food
+public class Meal
 {
     public int Id { get; set; }
 

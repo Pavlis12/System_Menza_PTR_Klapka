@@ -19,8 +19,8 @@ app.MapPost("/db/reset", async (MinuteDbContext db) =>
     await db.Database.EnsureCreatedAsync();
 
     // Vložíme testovací data (Seed)
-    db.Foods.Add(new Food { Description = "Svíčková na smetaně", Price = 165 });
-    db.Foods.Add(new Food { Description = "Guláš s knedlíkem", Price = 145 });
+    db.Meals.Add(new Meal { Description = "Svíčková na smetaně", Price = 165 });
+    db.Meals.Add(new Meal { Description = "Guláš s knedlíkem", Price = 145 });
 
     await db.SaveChangesAsync();
 
