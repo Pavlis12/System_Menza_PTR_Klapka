@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using UTB.Minute.Contracts;
 using UTB.Minute.Db.Entities;
 
 namespace UTB.Minute.Db;
@@ -11,14 +12,16 @@ public class MinuteDbContext : DbContext
     }
 
     // Definice tabulek
-    public DbSet<Food> Foods => Set<Food>();
+    public DbSet<Meal> Meals => Set<Meal>();
     public DbSet<MenuEntry> MenuEntries => Set<MenuEntry>();
 
     // Zde můžeme nastavit pokročilejší pravidla (např. přesnost ceny)
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Food>()
+        modelBuilder.Entity<Meal>()
             .Property(f => f.Price)
             .HasPrecision(18, 2); // 18 číslic celkem, 2 desetinná místa
     }
+ 
+    public DbSet<Order> Orders => Set<Order>();
 }

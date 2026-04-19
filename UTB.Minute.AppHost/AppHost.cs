@@ -19,6 +19,6 @@ builder.AddProject<Projects.UTB_Minute_AdminClient>("adminclient")
 builder.AddProject<Projects.UTB_Minute_CanteenClient>("canteenclient")
        .WithReference(api); // Student/Kuchařka mluví s API
 
-builder.AddProject<Projects.UTB_Minute_DbManager>("utb-minute-dbmanager").WithReference(db);
-
+builder.AddProject<Projects.UTB_Minute_DbManager>("dbmanager").WithReference(db);
+Console.WriteLine("TEST");
 builder.Build().Run();

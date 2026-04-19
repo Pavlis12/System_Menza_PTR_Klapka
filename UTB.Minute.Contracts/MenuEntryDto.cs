@@ -3,6 +3,6 @@
 public record MenuEntryDto(
     int Id,
     DateTime Date,
-    FoodDto Food,
-    int PortionsAvailable
+    MealDto Food,
+    int AvailablePortions
 );

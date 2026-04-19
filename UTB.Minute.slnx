@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Položky řešení/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="UTB.Minute.AdminClient/UTB.Minute.AdminClient.csproj" />
   <Project Path="UTB.Minute.ApiService/UTB.Minute.WebApi.csproj" />
   <Project Path="UTB.Minute.AppHost/UTB.Minute.AppHost.csproj" />
@@ -7,4 +10,5 @@
   <Project Path="UTB.Minute.Db/UTB.Minute.Db.csproj" />
   <Project Path="UTB.Minute.DbManager/UTB.Minute.DbManager.csproj" />
   <Project Path="UTB.Minute.ServiceDefaults/UTB.Minute.ServiceDefaults.csproj" />
+  <Project Path="UTB.Minute.WebApi.Tests/UTB.Minute.WebApi.Tests.csproj" Id="a04ac5ee-c784-4ec4-b267-ffba0d96cf03" />
 </Solution>

@@ -5,12 +5,8 @@ namespace UTB.Minute.Db.Entities;
 public class MenuEntry
 {
     public int Id { get; set; }
-
+    public int MealId { get; set; }
+    public Meal Meal { get; set; } = null!;
     public DateTime Date { get; set; }
-
-    public int PortionsAvailable { get; set; }
-
-    // Cizí klíč k jídlu
-    public int FoodId { get; set; }
-    public virtual Food Food { get; set; } = null!;
+    public int AvailablePortions { get; set; } // Musí se to jmenovat stejně
 }
