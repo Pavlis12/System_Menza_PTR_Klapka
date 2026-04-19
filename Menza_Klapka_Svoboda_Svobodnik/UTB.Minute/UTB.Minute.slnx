@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="UTB.Minute.AdminClient/UTB.Minute.AdminClient.csproj" />
+  <Project Path="UTB.Minute.CanteenClient.Cook/UTB.Minute.CanteenClient.Cook.csproj" />
+  <Project Path="UTB.Minute.CanteenClient.Student/UTB.Minute.CanteenClient.Student.csproj" />
+  <Project Path="UTB.Minute.Contracts/UTB.Minute.Contracts.csproj" />
+  <Project Path="UTB.Minute.Db/UTB.Minute.Db.csproj" />
+  <Project Path="UTB.Minute.DbManager/UTB.Minute.DbManager.csproj" />
+  <Project Path="UTB.Minute.WebApi.Tests/UTB.Minute.WebApi.Tests.csproj" Id="c37933dd-1b59-4492-8278-e30c1904fa81" />
+  <Project Path="UTB.Minute.WebApi/UTB.Minute.WebApi.csproj" />
+  <Project Path="UTB.Minute/UTB.Minute.Apphost.csproj" />
+</Solution>
